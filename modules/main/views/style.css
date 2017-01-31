@@ -1,0 +1,39 @@
+.shadow {
+    box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.5);
+}
+
+.active {
+    color: #009688;
+}
+
+a, a:visited {
+    text-decoration: none; color: white;
+}
+
+md-card[md-ink-ripple] {
+  position: relative;
+}
+
+md-card:hover {
+  background-color: #FAFAFA;
+}
+
+.avatar {
+    width: 24px;
+    height: 24px;
+
+    /* fill the container, preserving aspect ratio, and cropping to fit */
+    background-size: cover;
+
+    /* center the image vertically and horizontally */
+    background-position: center;
+
+    /* round the edges to a circle with border radius 1/2 container size */
+    border-radius: 50%;
+}
+
+html, body
+{
+     height: 100%;
+     margin: 0px;
+}

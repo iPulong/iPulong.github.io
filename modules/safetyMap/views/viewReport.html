@@ -1,0 +1,73 @@
+<form name="form" layout="column" style="min-height: 280px;" ng-controller="viewReportController">
+    <md-toolbar class="md-hue-2 shadow" md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <div class="inset">
+                <ng-md-icon ng-if="report.areaStatus == 'Unsafe'" icon="error"></ng-md-icon>
+                <ng-md-icon ng-if="report.areaStatus == 'Safe'" icon="check_circle"></ng-md-icon>
+            </div>
+            {{report.type}}
+            <span flex></span>
+            <!--<md-button class="md-icon-button inset">
+                <ng-md-icon icon="check"></ng-md-icon>
+            </md-button>
+            <md-button class="md-icon-button inset">
+                <ng-md-icon icon="close"></ng-md-icon>
+            </md-button>-->
+        </div>
+    </md-toolbar>
+    <md-content layout-padding>
+        <div layout="column">
+            <p style="white-space: pre-wrap;">{{report.description}}</p>
+            <div layout="row">
+                <img class="avatar" ng-if="firebaseUser.photoURL" src="{{firebaseUser.photoURL}}" style="width:16px; "/>
+                <em>{{report.user.displayName}}</em>
+            </div>
+            <div layout="row">
+                <img ng-repeat="image in report.images" src="{{image}}" ng-click="changeImg(image)" style="max-height: 32px;">
+            </div>
+            <div layout="row">
+                <img src="{{imageView}}">
+            </div>
+            <div layout="column" ng-if="report.areaStatus == 'Unsafe'">
+                <md-subheader>Response</md-subheader>
+
+                <div layout="row">
+                    <md-button ng-click="valid(report)" flex ng-disabled="report.valid" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
+                        Valid {{report.valid}}
+                    </md-button>
+                    <md-button  ng-click="delete(report)" ng-if="!report.valid" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
+                        Invalid
+                    </md-button>
+                </div>
+
+                <div layout="row">
+                    <md-button  ng-click="sendTeam(report)" flex ng-disabled="!report.valid || report.teamSent" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
+                        Help Team Sent {{report.teamSent}}
+                    </md-button>
+                </div>
+                <div layout="row">
+                    <md-button ng-click="teamOnSite(report)" flex ng-disabled="!report.teamSent || report.onsite" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
+                        Team is on site {{report.onsite}}
+                    </md-button>
+                </div>
+                <div layout="row">
+                    <md-button ng-click="rescued(report)" flex ng-disabled="!report.onsite || report.rescued" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
+                        Rescued/Done {{report.rescued}}
+                    </md-button>
+                </div>
+                <div layout="row" layout-align="end end">
+                    <md-input-container flex>
+                        <label>Custom Report</label>
+                        <textarea name="type" ng-model="report.customReport" required>
+                        </textarea>
+                    </md-input-container>
+                    <md-button class="md-icon-button inset md-primary" style="position: relative; bottom: 32px;">
+                        <ng-md-icon icon="send"></ng-md-icon>
+                    </md-button>
+                </div>
+            </div>
+
+            
+        </div>
+    </md-content>
+</form>

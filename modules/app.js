@@ -1,0 +1,13 @@
+(function(){
+    angular
+        .module('app',[
+            'ngMessages',
+            'ngMaterial',
+            'ngMdIcons',
+            'ngFileUpload',
+            'ui.router',
+            'firebase',
+            'ngMap',
+            'LocalStorageModule'
+        ]);
+})();

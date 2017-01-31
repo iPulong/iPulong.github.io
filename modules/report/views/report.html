@@ -1,0 +1,47 @@
+<div flex layout="column" ng-controller="reportController">
+    <md-toolbar md-scroll-shrink class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleSideNav('left');" hide-gt-sm>
+                <ng-md-icon icon="menu"></ng-md-icon>   
+            </md-button>
+            Report <em>(offline mode)</em>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Menu">
+                <ng-md-icon icon="zoom"></ng-md-icon>   
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <!--<div layout="column" layout-align="center center" flex>
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>-->
+    <div flex layout="column" layout-align="center center">
+        <!--<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        <h1>Under Construction</h1>-->
+        <div layout="column" layout-align="center center">
+            <pre>SMS: {{interval?interval.sms:'Stopped'}}</pre>
+        </div>
+        
+        <div layout="row">
+            <md-button ng-click="alert()" style="width: 128px; height:128px" class="md-fab md-primary" aria-label="Eat cake">
+                <ng-md-icon icon="notifications_active" style="width: 72px; height: 72px" size="72"></ng-md-icon>
+            </md-button>
+        </div>
+        <div layout="row">
+            <md-button ng-click="watch()" style="width: 72px; height:72px" class="md-fab md-warn" aria-label="Eat cake">
+                <ng-md-icon icon="visibility" style="width: 42px; height: 42px" size="42"></ng-md-icon>
+            </md-button>
+            <md-button ng-click="warn()" class="md-fab" aria-label="Eat cake" style="width: 72px; height:72px; background-color:#FFC107;">
+                <ng-md-icon icon="warning" style="width: 42px; height: 42px" size="42"></ng-md-icon>
+            </md-button>
+        </div>
+        <div layout="row">
+            <md-button ng-click="stop()" style=" background-color: gray;" class="md-fab" aria-label="Eat cake">
+                <ng-md-icon icon="stop" style="width: 42px; height: 42px;" size="42"></ng-md-icon>
+            </md-button>
+        </div>
+       
+    </div>
+</div>
+
+

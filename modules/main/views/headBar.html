@@ -1,0 +1,60 @@
+<md-toolbar class="md-hue-2 shadow" md-scroll-shrink ng-controller="authController">
+    <div class="md-toolbar-tools">
+        <div class="inset">
+            <ng-md-icon icon="error_outline"></ng-md-icon>
+        </div>
+        Safety App
+        <span flex></span>
+        
+        <md-menu md-position-mode="target-right target" ng-hide="firebaseUser">
+            <md-button aria-label="User menu" class="md-icon-button md-raised md-primary" ng-click="$mdOpenMenu($event)">
+                <ng-md-icon icon="person"></ng-md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <em class="inset">login with:</em>
+                <!--<md-menu-item>
+                    <md-button>
+                        <ng-md-icon icon="facebook"></ng-md-icon>
+                        Facebook
+                    </md-button>
+                </md-menu-item>-->
+                <md-menu-item>
+                    <md-button ng-click="loginWith('facebook')">
+                        <ng-md-icon icon="facebook"></ng-md-icon>
+                        Facebook
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                    <md-button ng-click="setContacts();">
+                        <ng-md-icon icon="contacts"></ng-md-icon>
+                        Emergency Contacts
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>        
+        
+        <md-menu ng-if="firebaseUser.photoURL" md-position-mode="target-right target" ng-show="firebaseUser">
+            <md-button aria-label="User menu" class="md-icon-button md-raised md-primary" ng-click="$mdOpenMenu($event)">
+                <img class="avatar" ng-if="firebaseUser.photoURL" src="{{firebaseUser.photoURL}}"/>
+            </md-button>
+            <md-menu-content width="4">
+                <em class="inset"><img class="avatar" ng-if="firebaseUser.photoURL" src="{{firebaseUser.photoURL}}"/>{{firebaseUser.displayName}}</em>
+                <md-menu-item>
+                    <md-button ng-click="setContacts();">
+                        <ng-md-icon icon="contacts"></ng-md-icon>
+                        Emergency Contacts
+                    </md-button>
+                </md-menu-item>
+                <md-menu-divider></md-menu-divider>
+                <md-menu-item>
+                <md-button ng-click="signOut()">
+                    <ng-md-icon icon="logout"></ng-md-icon>
+                    Logout
+                </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        
+    </div>
+</md-toolbar>

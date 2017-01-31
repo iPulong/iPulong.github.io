@@ -1,0 +1,75 @@
+<div flex layout="column" style="">
+    <md-toolbar md-scroll-shrink class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleSideNav('left');" hide-gt-sm>
+                <ng-md-icon icon="menu"></ng-md-icon>   
+            </md-button>
+            Safety Map
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Menu">
+                <ng-md-icon icon="zoom"></ng-md-icon> 
+                <md-tooltip md-direction="left">
+                    Test
+                </md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div flex layout="column" style="background-color: blue;">
+        <div flex map-lazy-load="https://maps.google.com/maps/api/js" style="background-color: black;">
+            <ng-map
+            style="height: calc(100vh - 112px);"
+            center="[{{myPosition.coords.latitude}},{{myPosition.coords.longitude}}]"
+            id="gmap" 
+            zoom="{{zoom}}" 
+            zoom-control="false"  
+            street-view-control-options="{position:'LEFT_TOP'}" 
+            >
+
+                <marker ng-if="myPosition.coords"
+                position="[{{myPosition.coords.latitude}},{{myPosition.coords.longitude}}]" 
+                title="You're here!"
+                animation="BOUNCE" >
+                </marker>
+
+                <marker ng-repeat="report in reports | orderBy:'-datetime'"
+                icon="{scaledSize:[32,32], url: 'modules/safetyMap/views/{{(report.areaStatus == 'Unsafe'?'error_logo':'check_logo')}}.png' }"
+                id="{{report.$id}}"
+                ng-if="report.coords"
+                on-click="viewDetails(event, report)"
+                position="[{{report.coords.latitude}},{{report.coords.longitude}}]" 
+                title="{{report.areaStatus}}"
+                animation="DROP" >
+                </marker>
+
+                <info-window id="infoWindow">
+                    <div ng-non-bindable="">
+                        <div flex ng-include="'modules/safetyMap/views/viewReport.html'"></div>
+                    </div>
+                </info-window>
+            </ng-map>
+        </div>
+    </div>
+</div>
+
+<div layout="row" layout-padding layout-align="end end" style="position: relative; bottom: 0px;">
+    <div layout="column">
+        <div style="width:56px;" hide-xs hide-sm></div>
+    </div>
+    <div ng-hide="!firebaseUser" layout="row" flex layout-align="center center">
+        <md-button ng-click="report(true)" class="md-fab md-primary" aria-label="Eat cake">
+            <ng-md-icon icon="error"></ng-md-icon>
+        </md-button>
+        <md-button ng-click="report(false)" class="md-fab" aria-label="Eat cake" style="background-color:#4CAF50;">
+            <ng-md-icon icon="check_circle"></ng-md-icon>
+        </md-button>
+    </div>
+    <div layout="column">
+        <md-button ng-click="zoomIn();" class="md-fab md-mini" aria-label="zoom in" style="background-color:#757575">
+            <ng-md-icon icon="zoom_in"></ng-md-icon>
+        </md-button>
+        <md-button ng-click="zoomOut();" class="md-fab md-mini" aria-label="zoom out" style="background-color:#757575">
+            <ng-md-icon icon="zoom_out"></ng-md-icon>
+        </md-button>
+    </div>
+</div>

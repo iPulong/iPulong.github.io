@@ -1,0 +1,43 @@
+
+<form name="form" layout="column" style="min-height: 280px;">
+    <md-toolbar class="md-hue-2 shadow" md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <div class="inset">
+                <ng-md-icon icon="contacts"></ng-md-icon>
+            </div>
+            Emmergency Contacts
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+        <md-input-container class="md-block">
+            <label>Contacts</label>
+            <md-chips placeholder="Contacts" class="custom-chips" ng-model="emergencyContacts" readonly="true"
+        md-transform-chip="addProject($chip)" md-removable="false">
+                <md-chip-template md-ink-ripple>
+                    <span>
+                      <strong>{{$chip.displayName}}</strong>
+                      <em>{{$chip.phoneNumbers[0].value}}</em>
+                      <!--<em>({{$chip.type}})</em>-->
+                    </span>
+                    <ng-md-icon md-chip-remove ng-click="addToDeviceContacts($chip)" style="margin: auto; background-color:white; border-radius: 50%; width: 18px; height: 18px; fill: #D32F2F;" icon="remove" size="18" ></ng-md-icon>
+                </md-chip-template>
+            </md-chips>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Suggestions</label>
+            <md-chips placeholder="Contacts" class="custom-chips" ng-model="deviceContacts" readonly="true"
+        md-transform-chip="addProject($chip)" md-removable="false">
+                <md-chip-template md-ink-ripple>
+                    <span>
+                      <strong>{{$chip.displayName}}</strong>
+                      <em>{{$chip.phoneNumbers[0].value}}</em>
+                      <!--<em>({{$chip.type}})</em>-->
+                    </span>
+                    <ng-md-icon md-chip-remove ng-click="addToEmergencyContacts($chip)" style="margin: auto; background-color:white; border-radius: 50%; width: 18px; height: 18px; fill: #03A9F4;" icon="add" size="18" ></ng-md-icon>
+                </md-chip-template>
+            </md-chips>
+        </md-input-container>
+    </md-content>
+</form>

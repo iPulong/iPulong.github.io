@@ -1,0 +1,73 @@
+<div ng-controller="reportMapController" layout="column" style="min-height: 280px;">
+    <md-toolbar class="md-hue-2 shadow" md-scroll-shrink>
+        <div class="md-toolbar-tools">
+            <div class="inset">
+                <ng-md-icon ng-if="status" icon="error"></ng-md-icon>
+                <ng-md-icon ng-if="!status" icon="check_circle"></ng-md-icon>
+            </div>
+            {{(status?'Help Desk':'Safe Area')}}
+            <span flex></span>
+            <md-button ng-disabled="!form.$valid || loading" aria-label="User menu" ng-click="save()">
+                <ng-md-icon icon="check"></ng-md-icon> Save
+            </md-button>
+        </div>
+    </md-toolbar>
+    
+    
+    <md-content layout-padding>
+        <div layout="column">
+            <md-button
+                    ngf-capture="'camera'"
+                    ngf-select
+                    ngf-multiple="true"
+                    ng-model="report.images"
+                    name="images"
+                    ngf-pattern="'image/*'"
+                    ngf-accept="'image/*'"
+                    ngf-max-size="20MB"
+                    ngf-min-width="200" 
+                    ngf-min-height="200" 
+                    ngf-resize="{width: 1024, height: 768}"
+                    class="md-primary md-raised"
+                    aria-label="Upload">
+                <ng-md-icon icon="add_a_photo" ></ng-md-icon>
+                Capture
+            </md-button>
+            <div layout="row">
+                <img ng-repeat="image in report.images" ngf-thumbnail="image || '/thumb.jpg'">
+                <!--<img ng-repeat="image in report.images" src="data:image/jpeg;base64,{{image}}">-->
+            </div>
+            
+            <form name="form" layout="column" >
+            
+            <!--<div layout="row">
+                <md-button flex ng-click="captureImage(0)">
+                    <ng-md-icon style="fill: #9E9E9E" icon="add_a_photo" ></ng-md-icon>
+                </md-button>
+                <md-button flex ng-click="captureImage(1)">                    
+                    <ng-md-icon style="fill: #9E9E9E" icon="add_a_photo" ></ng-md-icon>
+                </md-button>
+                <md-button flex ng-click="captureImage(2)">       
+                    <ng-md-icon style="fill: #9E9E9E" icon="add_a_photo" ></ng-md-icon>
+                </md-button>
+            </div>-->
+            
+            <md-input-container>
+                <label>{{(status?'Assistance':'Security')}}</label>
+                <md-select name="type" ng-model="report.type" required>
+                    <md-option value="Police">Police</md-option>
+                    <md-option value="Health">Health</md-option>
+                    <md-option value="Disaster">Disaster risk</md-option>
+                    <md-option value="Fire">Fire</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container>
+                <label>{{(status?'Status of incident/area?':'Why/how is it safe?')}}</label>
+                <textarea name="type" ng-model="report.description" required>
+                </textarea>
+            </md-input-container>
+            
+            </form>
+        </div>
+    </md-content>
+</div>
