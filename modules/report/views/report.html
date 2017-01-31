@@ -24,20 +24,24 @@
         
         <div layout="row">
             <md-button ng-click="alert()" style="width: 128px; height:128px" class="md-fab md-primary" aria-label="Eat cake">
-                <ng-md-icon icon="notifications_active" style="width: 72px; height: 72px" size="72"></ng-md-icon>
+                <ng-md-icon icon="notifications_active" style="width: 72px; height: 72px; position: relative; top: 20px;" size="72"></ng-md-icon>
+                <span style="font-size: 8px;"><br>Alert</span>
             </md-button>
         </div>
         <div layout="row">
             <md-button ng-click="watch()" style="width: 72px; height:72px" class="md-fab md-warn" aria-label="Eat cake">
                 <ng-md-icon icon="visibility" style="width: 42px; height: 42px" size="42"></ng-md-icon>
+                <span style="font-size: 8px; position: relative; bottom: 28px;"><br>Watch</span>
             </md-button>
             <md-button ng-click="warn()" class="md-fab" aria-label="Eat cake" style="width: 72px; height:72px; background-color:#FFC107;">
                 <ng-md-icon icon="warning" style="width: 42px; height: 42px" size="42"></ng-md-icon>
+                <span style="font-size: 8px; position: relative; bottom: 28px;"><br>Warn</span>
             </md-button>
         </div>
         <div layout="row">
             <md-button ng-click="stop()" style=" background-color: gray;" class="md-fab" aria-label="Eat cake">
                 <ng-md-icon icon="stop" style="width: 42px; height: 42px;" size="42"></ng-md-icon>
+                <span style="font-size: 8px; position: relative; bottom: 38px;"><br>Stop</span>
             </md-button>
         </div>
        
