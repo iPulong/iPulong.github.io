@@ -10,6 +10,7 @@
         
         $scope.loginWith = function(provider) {
             
+            if(facebookConnectPlugin)
             facebookConnectPlugin.login(['public_profile'], function(auth){
                 var credential = firebase.auth.FacebookAuthProvider.credential(auth.authResponse.accessToken)
                 console.log(credential);
