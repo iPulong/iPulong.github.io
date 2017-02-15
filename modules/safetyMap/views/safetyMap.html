@@ -6,10 +6,10 @@
             </md-button>
             Safety Map
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="Menu">
-                <ng-md-icon icon="zoom"></ng-md-icon> 
+            <md-button ui-sref="help" class="md-icon-button" aria-label="Menu">
+                <ng-md-icon icon=""></ng-md-icon> 
                 <md-tooltip md-direction="left">
-                    Test
+                    Help
                 </md-tooltip>
             </md-button>
         </div>
@@ -34,7 +34,7 @@
                 </marker>
 
                 <marker ng-repeat="report in reports | orderBy:'-datetime'"
-                icon="{scaledSize:[32,32], url: 'modules/safetyMap/views/{{(report.areaStatus == 'Unsafe'?'error_logo':'check_logo')}}.png' }"
+                icon="{scaledSize:[32,32], url: 'modules/safetyMap/views/{{(report.areaStatus == 'Safe' || report.rescued?'check_logo':'error_logo')}}.png' }"
                 id="{{report.$id}}"
                 ng-if="report.coords"
                 on-click="viewDetails(event, report)"
@@ -58,10 +58,10 @@
         <div style="width:56px;" hide-xs hide-sm></div>
     </div>
     <div ng-hide="!firebaseUser" layout="row" flex layout-align="center center">
-        <md-button ng-click="report(true)" class="md-fab md-primary" aria-label="Eat cake">
+        <md-button ng-click="reportDialog(true)" class="md-fab md-primary" aria-label="Eat cake">
             <ng-md-icon icon="error"></ng-md-icon>
         </md-button>
-        <md-button ng-click="report(false)" class="md-fab" aria-label="Eat cake" style="background-color:#4CAF50;">
+        <md-button ng-click="reportDialog(false)" class="md-fab" aria-label="Eat cake" style="background-color:#4CAF50;">
             <ng-md-icon icon="check_circle"></ng-md-icon>
         </md-button>
     </div>

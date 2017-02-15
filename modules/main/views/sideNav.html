@@ -7,11 +7,11 @@
     md-is-locked-open="$mdMedia('gt-sm')">
     <div hide-gt-sm ng-include="'modules/main/views/headBar.html'"></div>
     <md-toolbar class="md-hue-4">
-        <div class="md-toolbar-tools" style="color: white"> <span style="font-size: 16px" class="inset">Apps that keeps you safe</span> </div>
+        <div class="md-toolbar-tools" style="color: white"> <span style="font-size: 16px" class="inset">report, validate, respond!</span> </div>
     </md-toolbar>
     <md-content >
         <md-list class="md-dense" flex style="color: #757575;">
-            <md-list-item md-ink-ripple ng-click="toggleSideNav('left');" ui-sref="report" ng-class="{active: $state.current.name=='report'}">
+            <md-list-item ng-show="forUser(['Brgy','User'])" md-ink-ripple ng-click="toggleSideNav('left');" ui-sref="report" ng-class="{active: $state.current.name=='report'}">
                   <md-item-content layout="row" layout-align="start center">
                     <div class="inset">
                         <ng-md-icon icon="add_alert" style=""></ng-md-icon>
@@ -32,13 +32,13 @@
                   </md-item-content>
             </md-list-item>
             <md-divider></md-divider>
-            <md-list-item md-ink-ripple ng-click="toggleSideNav('left');" ui-sref="contactus" ng-class="{active: $state.current.name=='contactus'}">
+            <md-list-item md-ink-ripple ng-click="toggleSideNav('left');" ui-sref="help" ng-class="{active: $state.current.name=='help'}">
                   <md-item-content layout="row" layout-align="start center">
                     <div class="inset">
-                      <ng-md-icon icon="contact_phone" style=""></ng-md-icon>
+                      <ng-md-icon icon="qwe" style=""></ng-md-icon>
                     </div>
                     <div class="inset">
-                        Contact Us
+                        Help
                     </div>
                   </md-item-content>
             </md-list-item>

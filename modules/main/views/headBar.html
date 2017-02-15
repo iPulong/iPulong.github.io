@@ -3,7 +3,7 @@
         <div class="inset">
             <ng-md-icon icon="error_outline"></ng-md-icon>
         </div>
-        Safety App
+        iPulong <em> &nbsp {{::userType}}</em>
         <span flex></span>
         
         <md-menu md-position-mode="target-right target" ng-hide="firebaseUser">
@@ -25,7 +25,7 @@
                     </md-button>
                 </md-menu-item>
                 <md-menu-divider></md-menu-divider>
-                <md-menu-item>
+                <md-menu-item ng-show="forUser(['Brgy','User'])">
                     <md-button ng-click="setContacts();">
                         <ng-md-icon icon="contacts"></ng-md-icon>
                         Emergency Contacts
@@ -40,7 +40,7 @@
             </md-button>
             <md-menu-content width="4">
                 <em class="inset"><img class="avatar" ng-if="firebaseUser.photoURL" src="{{firebaseUser.photoURL}}"/>{{firebaseUser.displayName}}</em>
-                <md-menu-item>
+                <md-menu-item ng-show="forUser(['Brgy','User'])">
                     <md-button ng-click="setContacts();">
                         <ng-md-icon icon="contacts"></ng-md-icon>
                         Emergency Contacts

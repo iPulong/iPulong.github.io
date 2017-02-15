@@ -8,6 +8,12 @@
         $rootScope.none = function(){}
         $rootScope.$state = $state;
         
+        $rootScope.userType = 'LGU'; // LGU, Brgy, User
+        
+        $rootScope.forUser = function(arr){
+            return (arr.indexOf($rootScope.userType) != -1);
+        };
+        
         authService.$onAuthStateChanged(function(firebaseUser) {
             $rootScope.firebaseUser = firebaseUser;
             console.log('Firebase', firebaseUser);

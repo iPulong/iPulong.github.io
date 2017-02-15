@@ -1,11 +1,11 @@
 <form name="form" layout="column" style="min-height: 280px;" ng-controller="viewReportController">
-    <md-toolbar class="md-hue-2 shadow" md-scroll-shrink>
+    <md-toolbar class="md-hue-2 shadow" >
         <div class="md-toolbar-tools">
             <div class="inset">
                 <ng-md-icon ng-if="report.areaStatus == 'Unsafe'" icon="error"></ng-md-icon>
                 <ng-md-icon ng-if="report.areaStatus == 'Safe'" icon="check_circle"></ng-md-icon>
             </div>
-            {{report.type}}
+            {{report.type}} <em ng-show="report.rescued"> Rescued/Done</em>
             <span flex></span>
             <!--<md-button class="md-icon-button inset">
                 <ng-md-icon icon="check"></ng-md-icon>
@@ -31,7 +31,7 @@
             <div layout="column" ng-if="report.areaStatus == 'Unsafe'">
                 <md-subheader>Response</md-subheader>
 
-                <div layout="row">
+                <div layout="row" ng-show="forUser(['Brgy'])">
                     <md-button ng-click="valid(report)" flex ng-disabled="report.valid" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
                         Valid {{report.valid}}
                     </md-button>
@@ -40,30 +40,44 @@
                     </md-button>
                 </div>
 
-                <div layout="row">
-                    <md-button  ng-click="sendTeam(report)" flex ng-disabled="!report.valid || report.teamSent" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
+                <div layout="row" ng-show="forUser(['LGU'])">
+                    <md-button ng-click="sendTeam(report)" flex ng-disabled="!report.valid || report.teamSent" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
                         Help Team Sent {{report.teamSent}}
                     </md-button>
                 </div>
-                <div layout="row">
+                <div layout="row" ng-show="forUser(['Brgy'])">
                     <md-button ng-click="teamOnSite(report)" flex ng-disabled="!report.teamSent || report.onsite" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
                         Team is on site {{report.onsite}}
                     </md-button>
                 </div>
-                <div layout="row">
+                <div layout="row" ng-show="forUser(['Brgy'])">
                     <md-button ng-click="rescued(report)" flex ng-disabled="!report.onsite || report.rescued" class="md-primary md-raised" ng-if="report.areaStatus == 'Unsafe'">
                         Rescued/Done {{report.rescued}}
                     </md-button>
                 </div>
-                <div layout="row" layout-align="end end">
+                <div layout="row" layout-align="end end" ng-show="forUser(['LGU','Brgy'])">
                     <md-input-container flex>
                         <label>Custom Report</label>
                         <textarea name="type" ng-model="report.customReport" required>
                         </textarea>
                     </md-input-container>
-                    <md-button class="md-icon-button inset md-primary" style="position: relative; bottom: 32px;">
+                    <md-button ng-click="sendReport(report)" class="md-icon-button inset md-primary" style="position: relative; bottom: 32px;">
                         <ng-md-icon icon="send"></ng-md-icon>
                     </md-button>
+                </div>
+                
+                <div layout="column">
+                    <md-list class="md-dense" flex>
+                        <md-subheader>Progress</md-subheader>
+                        <md-list-item class="md-3-line" ng-repeat="item in report.progress | orderBy:'-datetime'">
+                          <img src="{{item.user.photoURL}}" class="md-avatar avatar" alt="{{item.user.email}}" />
+                          <div class="md-list-item-text" layout="column">
+                            <h3>{{ item.action }}</h3>
+                            <h4>{{ item.datetime }}</h4>
+                            <p>{{ item.user.email }}</p>
+                          </div>
+                        </md-list-item>
+                    </md-list>
                 </div>
             </div>
 

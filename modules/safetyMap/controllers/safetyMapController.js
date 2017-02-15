@@ -23,8 +23,8 @@
         
         NgMap.getMap("gmap").then(function (map) {
             google.maps.event.trigger(map, "resize");
-            $scope.zoom = 14;
-            $scope.map = map;
+            /*$scope.zoom = 14;
+            $scope.map = map;*/
             
             navigator.geolocation.getCurrentPosition(function(position) {
                 $timeout(function(){
@@ -61,8 +61,13 @@
             $scope.zoom--;
         }
         
-        $scope.report = function(status) {
+        $scope.reportDialog = function(status) {
+            
+            console.log(status);
+            
             $mdDialog.show({
+                scope:$scope,
+                preserveScope:true,
               controller: dialogController,
               templateUrl: 'modules/safetyMap/views/reportMap.html',
               parent: angular.element(document.querySelector('#main-container')),
@@ -76,14 +81,19 @@
         }
         
         $scope.viewDetails = function(data, report){
+            //var rootScope = $rootScope;
+            
             $mdDialog.show({
+                scope:$scope,
+                preserveScope:true,
               controller: dialogController,
               templateUrl: 'modules/safetyMap/views/viewReport.html',
               parent: angular.element(document.querySelector('#main-container')),
               clickOutsideToClose:true
             });
-            
+             
             function dialogController($scope){
+                //$rootScope = rootScope;
                 $scope.report = report;
             }
         }

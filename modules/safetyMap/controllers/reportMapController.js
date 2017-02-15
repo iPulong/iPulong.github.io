@@ -4,7 +4,7 @@
     .module('app')
     .controller('reportMapController', reportMapController);
 
-    function reportMapController($scope, $rootScope, storageService, $mdDialog) {
+    function reportMapController($scope, reportsService, $rootScope, storageService, $mdDialog) {
         console.log($scope.status);
         
         $scope.report = {};
@@ -87,7 +87,7 @@
                     
                     if(keepGoing && report.images.length == $scope.report.images.length){
                         console.log(report.images);
-                        $scope.reports
+                        reportsService
                         .$add(report).then(function(ref) {
                             var id = ref.key;
                             console.log("added record with id " + id);

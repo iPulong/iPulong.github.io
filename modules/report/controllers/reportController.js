@@ -57,57 +57,68 @@
         }
         
         $scope.stop = function(){
-            $interval.cancel($rootScope.interval);
-            $mdToast.show( 
-                $mdToast.simple()
-                    .textContent('SMS was stopped')
-                    .position('top right')
-                    .hideDelay(3000)
-            );
-            $rootScope.interval = null;
-        }
-        
-        $scope.alert = function(){
-            navigator.geolocation.getCurrentPosition(function(position) {
-                
-                $rootScope.interval = $interval(function(){
-                    angular.forEach($rootScope.emergencyContacts, function(value, key) {
-                        var options = {
-                            replaceLineBreaks: false, // true to replace \n by a new line, false by default
-                            android: {
-                                //intent: 'INTENT'  // send SMS with the native android SMS messaging
-                                intent: '' // send SMS without open any other app
-                            }
-                        };
-                        var number = value.phoneNumbers[0].value;
-                        var message = 'ALERT: Help! i am in danger! \nfollow me: http://maps.google.com/maps?q='+position.coords.latitude+','+position.coords.longitude;
-                        sms.send(number, message, options, function(){
-                            $mdToast.show(
-                                $mdToast.simple()
-                                    .textContent('ALERTED: '+ number +' ('+ position.coords.latitude+','+position.coords.longitude+')')
-                                    .position('top right')
-                                    .hideDelay(3000)
-                            );
-                        }, function(error){
-                            $mdToast.show( 
-                                $mdToast.simple()
-                                    .textContent(JSON.stringify(error))
-                                    .position('top right')
-                                    .hideDelay(3000)
-                            );
-                        }); 
-
-                    });
-                }, 15000); // 15secs
-                $rootScope.interval.sms = 'Alerting! 15secs Interval';
-            }, function(error) {
+            
+            if (angular.isDefined($rootScope.interval)) {
+                $interval.cancel($rootScope.interval);
+                $rootScope.interval = undefined;
                 $mdToast.show( 
                     $mdToast.simple()
-                        .textContent(JSON.stringify(error))
+                        .textContent('SMS was stopped')
                         .position('top right')
                         .hideDelay(3000)
                 );
-            });
+            }
+            //$interval.cancel($rootScope.interval);
+            
+            //$rootScope.interval = null;
+        }
+        
+        $scope.alert = function(){
+            
+                
+                $rootScope.interval = $interval(function(){
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        console.log('SMS', sms);
+                        angular.forEach($rootScope.emergencyContacts, function(value, key) {
+                            var options = {
+                                replaceLineBreaks: false, // true to replace \n by a new line, false by default
+                                android: {
+                                    //intent: 'INTENT'  // send SMS with the native android SMS messaging
+                                    intent: '' // send SMS without open any other app
+                                }
+                            };
+                            var number = value.phoneNumbers[0].value;
+                            var message = 'ALERT: Help! i am in danger! \nfollow me: http://maps.google.com/maps?q='+position.coords.latitude+','+position.coords.longitude;
+
+                            sms.send(number, message, options, function(){
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .textContent('ALERTED: '+ number +' ('+ position.coords.latitude+','+position.coords.longitude+')')
+                                        .position('top right')
+                                        .hideDelay(3000)
+                                );
+                            }, function(error){
+                                $mdToast.show( 
+                                    $mdToast.simple()
+                                        .textContent(JSON.stringify(error))
+                                        .position('top right')
+                                        .hideDelay(3000)
+                                );
+                            }); 
+                            
+                        });
+                        
+                    }, function(error) {
+                        $mdToast.show( 
+                            $mdToast.simple()
+                                .textContent(JSON.stringify(error))
+                                .position('top right')
+                                .hideDelay(3000)
+                        );
+                    });
+                }, 15000); // 15secs
+                $rootScope.interval.sms = 'Alerting! 15secs Interval';
+            
             
         }
         
@@ -168,7 +179,7 @@
                             }
                         };
                         var number = value.phoneNumbers[0].value;
-                        var message = 'WARNING: I feel i\'m in danger. \n please watch me: http://maps.google.com/maps?q='+position.coords.latitude+','+position.coords.longitude;
+                        var message = 'WARNING: I feel i\'m in danger. \n Location: http://maps.google.com/maps?q='+position.coords.latitude+','+position.coords.longitude;
                         sms.send(number, message, options, function(){
                             $mdToast.show(
                                 $mdToast.simple()

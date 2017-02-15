@@ -1,0 +1,91 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleSideNav('left');" hide-gt-sm>
+            <ng-md-icon icon="menu"></ng-md-icon>   
+        </md-button>
+        Help
+        <span flex></span>
+        
+    </div>
+</md-toolbar>
+
+<md-content style="background-color: white;" flex style="background-color: #EAEAEA;">
+    
+    <md-list class="md-dense" flex>
+        <md-subheader>
+            Report 
+            <em>(offline mode)</em>
+            <br>
+            &nbsp;&nbsp;&nbsp;<em>sends SMS with your location to your Emergency Contacts</em>
+        </md-subheader>
+        
+        <md-list-item class="md-3-line" ng-click="no=0;">
+            <div layout="row">
+              <ng-md-icon class="inset" icon="notifications_active"></ng-md-icon>
+            </div>
+            <div layout="row">
+              <div class="md-list-item-text" layout="column">
+                <h3>Alert</h3>
+                <h4>15secs interval</h4>
+                <p>ALERT: Help! i am in danger!</p>
+              </div>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-click="no=0;">
+            <div layout="row">
+              <ng-md-icon class="inset" icon="visibility"></ng-md-icon>
+            </div>
+            <div layout="row">
+              <div class="md-list-item-text" layout="column">
+                <h3>Watch</h3>
+                <h4>1min interval</h4>
+                <p>WATCH: I feel i'm in danger. please watch me</p>
+              </div>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-click="no=0;">
+            <div layout="row">
+              <ng-md-icon class="inset" icon="warning"></ng-md-icon>
+            </div>
+            <div layout="row">
+              <div class="md-list-item-text" layout="column">
+                <h3>Warn</h3>
+                <h4>No interval</h4>
+                <p>WARNING: I feel i\'m in danger.</p>
+              </div>
+            </div>
+        </md-list-item>
+    </md-list>
+    <md-list class="md-dense" flex>
+        <md-subheader>
+            Safety Map
+            <br>
+            &nbsp;&nbsp;&nbsp;<em>monitor your area in realtime</em>
+        </md-subheader>
+        
+        <md-list-item class="md-3-line" ng-click="no=0;">
+            <div layout="row">
+              <ng-md-icon class="inset" icon="check_circle"></ng-md-icon>
+            </div>
+            <div layout="row">
+              <div class="md-list-item-text" layout="column">
+                <h3>Safe Area</h3>
+                <h4>15secs interval</h4>
+                <p>ALERT: Help! i am in danger!</p>
+              </div>
+            </div>
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-click="no=0;">
+            <div layout="row">
+              <ng-md-icon class="inset" icon="error"></ng-md-icon>
+            </div>
+            <div layout="row">
+              <div class="md-list-item-text" layout="column">
+                <h3>Unsafe Area/Report</h3>
+                <h4>1min interval</h4>
+                <p>WATCH: I feel i'm in danger. please watch me</p>
+              </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</md-content>

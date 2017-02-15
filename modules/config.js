@@ -20,7 +20,9 @@
         //.accentPalette('light-blue');
         //.warnPalette('red');
         
-        $urlRouterProvider.otherwise("/report");
+        //$urlRouterProvider.when('', '/report');
+        $urlRouterProvider.when('', '/safetymap');
+        $urlRouterProvider.otherwise('/404');
         
         $stateProvider
         .state('safetymap', {
@@ -31,6 +33,11 @@
         .state('report', {
             url: "/report",
             templateUrl: 'modules/report/views/report.html',
+            //controller: 'certifiedController'
+        })
+        .state('help', {
+            url: "/help",
+            templateUrl: 'modules/main/views/help.html',
             //controller: 'certifiedController'
         })
         .state('404', {

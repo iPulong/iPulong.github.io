@@ -10,7 +10,7 @@
         
         $scope.loginWith = function(provider) {
             
-            /*facebookConnectPlugin.login(['public_profile'], function(auth){
+            facebookConnectPlugin.login(['public_profile'], function(auth){
                 var credential = firebase.auth.FacebookAuthProvider.credential(auth.authResponse.accessToken)
                 console.log(credential);
                 
@@ -31,7 +31,9 @@
                         .position('top right')
                         .hideDelay(5000)
                 );
-            });*/
+                
+                
+            });
             
             /*{
     "status": "connected",
@@ -51,14 +53,14 @@
                 console.log("firebaseUser:", $rootScope.firebaseUser);
             }).catch(function(error) {
                 console.error('$signInWithPopup:', error);
-                
+
                 $mdToast.show(
                     $mdToast.simple()
                         .textContent(JSON.stringify(error))
                         .position('top right')
                         .hideDelay(5000)
                 );
-                
+
                 authService.$signInWithPopup("google").then(function() {
                   // Never called because of page redirect
                 }).catch(function(error) {
