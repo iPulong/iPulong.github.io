@@ -26,7 +26,7 @@
                 <img ng-repeat="image in report.images" src="{{image}}" ng-click="changeImg(image)" style="max-height: 32px;">
             </div>
             <div layout="row">
-                <img src="{{imageView}}">
+                <img flex style="max-height:320px" src="{{imageView}}">
             </div>
             <div layout="column" ng-if="report.areaStatus == 'Unsafe'">
                 <md-subheader>Response</md-subheader>

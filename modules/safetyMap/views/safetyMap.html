@@ -33,7 +33,7 @@
                 animation="BOUNCE" >
                 </marker>
 
-                <marker ng-repeat="report in reports | orderBy:'-datetime'"
+                <marker ng-repeat="report in reports | orderBy:'-datetime'" 
                 icon="{scaledSize:[32,32], url: 'modules/safetyMap/views/{{(report.areaStatus == 'Safe' || report.rescued?'check_logo':'error_logo')}}.png' }"
                 id="{{report.$id}}"
                 ng-if="report.coords"

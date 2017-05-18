@@ -6,6 +6,20 @@
         iPulong <em> &nbsp {{::userType}}</em>
         <span flex></span>
         
+        <md-menu md-position-mode="target-right target" ng-controller="notifController">
+            <md-button aria-label="User menu" class="md-icon-button md-primary" ng-click="$mdOpenMenu($event); newNotif=false;">
+                <ng-md-icon icon="notifications" style="fill: {{newNotif?'white':''}}"></ng-md-icon>
+            </md-button>
+            <md-menu-content width="5">
+                <md-menu-item ng-repeat="report in reports | orderBy:'-datetime'">
+                    <md-button ng-click="viewDetails(event, report)" >
+                        <ng-md-icon icon="error"></ng-md-icon>
+                        {{report.type}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+        
         <md-menu md-position-mode="target-right target" ng-hide="firebaseUser">
             <md-button aria-label="User menu" class="md-icon-button md-raised md-primary" ng-click="$mdOpenMenu($event)">
                 <ng-md-icon icon="person"></ng-md-icon>

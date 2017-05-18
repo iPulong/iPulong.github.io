@@ -4,7 +4,7 @@
     .module('app')
     .controller('viewReportController', viewReportController);
 
-    function viewReportController($scope, $rootScope, reportsService) {
+    function viewReportController($scope, $rootScope, reportsService, $mdDialog) {
         $scope.imageView = $scope.report.images[0];
         
         $scope.changeImg = function(img){
@@ -27,7 +27,9 @@
         $scope.delete = function(report){
             //report.valid = moment().format('YYYY-MM-DD HH:mm');
             reportsService
-            .$remove(report)
+            .$remove(report);
+            
+            $mdDialog.hide();
         }
         
         $scope.sendTeam = function(report){
@@ -81,7 +83,6 @@
                 'datetime':datetime, 
                 'user':user
             });
-            report.rescued = datetime;
             reportsService
             .$save(report)
             $scope.report.customReport = "";

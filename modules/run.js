@@ -1,14 +1,14 @@
 (function(){
     angular
     .module('app')
-    .run(run);
+    .run(run); 
     
     function run($window, $timeout, $rootScope, $mdToast, $mdSidenav, $state, authService){
         
         $rootScope.none = function(){}
         $rootScope.$state = $state;
         
-        $rootScope.userType = 'LGU'; // LGU, Brgy, User
+        $rootScope.userType = 'User'; // LGU, Brgy, User
         
         $rootScope.forUser = function(arr){
             return (arr.indexOf($rootScope.userType) != -1);
@@ -18,7 +18,7 @@
             $rootScope.firebaseUser = firebaseUser;
             console.log('Firebase', firebaseUser);
         });
-
+ 
         $rootScope.toggleSideNav = function(id) {
             $mdSidenav(id).toggle();
         }

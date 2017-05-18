@@ -81,3 +81,63 @@
         }
     }
 })();
+
+
+(function(){
+    
+    angular
+    .module('app')
+    .controller('notifController', notifController);
+
+    function notifController($scope, $rootScope, $mdDialog, reportsService, $timeout, NgMap) {
+        $scope.reports = reportsService;
+        
+        $scope.$watch('reports.length', 
+            function(newValue, oldValue){
+                $scope.newNotif = true;
+            }
+        );
+        
+        $scope.viewDetails = function(data, report){
+            $mdDialog.show({
+                scope:$scope,
+                preserveScope:true,
+              controller: dialogController,
+              templateUrl: 'modules/safetyMap/views/viewReport.html',
+              parent: angular.element(document.querySelector('#main-container')),
+              clickOutsideToClose:true
+            });
+             
+            function dialogController($scope){
+                $scope.report = report;
+            }
+
+            NgMap.getMap("gmap").then(function (map) {
+                google.maps.event.trigger(map, "resize");
+
+                
+                    $timeout(function(){
+
+                        var pos = {
+                          lat: report.coords.latitude,
+                          lng: report.coords.longitude
+                        };
+                        
+                        //$rootScope.myPosition.coords.latitude = report.coords.latitude;
+                        //$rootScope.myPosition.coords.longitude = report.coords.longitude;
+                        $rootScope.zoom = 18;
+                        
+                        map.setCenter(pos);
+                        map.setZoom(16);
+                        //$rootScope.myPosition.coords.latitude = report.coords.latitude;
+                        //$rootScope.myPosition.coords.longitude = report.coords.longitude;
+                        google.maps.event.trigger(map, "resize");
+                    });
+    
+
+            });
+            
+            
+        }
+    }
+})();
